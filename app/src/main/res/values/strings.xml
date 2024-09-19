@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hollo Freeze</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shop_with_ease">Shop with Ease!</string>
+    <string name="with_hollo_freeze">With Hollo Freeze, grocery shopping is no longer a tedious chore. Instead, it becomes a delightful experience that brings joy to your everyday routine.</string>
+    <string name="get_started">Get Started</string>
+</resources>
