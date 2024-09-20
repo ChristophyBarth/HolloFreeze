@@ -53,7 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="194dp"
         android:layout_marginBottom="80dp"
-        android:src="@drawable/onboarding"
+        android:src="@drawable/onboarding_image"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintBottom_toTopOf="@id/title"
         app:layout_constraintEnd_toEndOf="@id/title"/>
