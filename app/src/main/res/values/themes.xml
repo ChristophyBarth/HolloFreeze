@@ -4,7 +4,6 @@
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/ourPrimaryColor</item>
         <item name="fontFamily">@font/poppins</item>
-        <item name="android:background">@color/ourBackgroundColor</item>
         <item name="android:textColor">@color/ourTextColor</item>
     </style>
 

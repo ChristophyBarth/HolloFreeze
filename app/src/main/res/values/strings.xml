@@ -5,4 +5,17 @@
     <string name="shop_with_ease">Shop with Ease!</string>
     <string name="with_hollo_freeze">With Hollo Freeze, grocery shopping is no longer a tedious chore. Instead, it becomes a delightful experience that brings joy to your everyday routine.</string>
     <string name="get_started">Get Started</string>
+    <string name="let_s_get_you_started_asap">Let\'s get you started ASAP!</string>
+    <string name="welcome_onboard">Welcome Onboard!</string>
+    <string name="register">Register</string>
+    <string name="sign_in">Sign In</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_your_email">Enter your Email</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
 </resources>
