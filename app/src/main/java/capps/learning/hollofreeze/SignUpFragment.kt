@@ -54,17 +54,17 @@ class SignUpFragment : Fragment() {
                 password: String,
                 currentPassword: String
             ): Boolean {
-                if (!name.isNotEmpty() && name.matches("[A-Z].*".toRegex())) {
+                if (name.isEmpty() && name.matches("[A-Z].*".toRegex())) {
                     println("Invalid name format")
                     return false
                 }
-                if (!email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                if (email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email)
                         .matches()
                 ) {
                     println("Invalid email format")
                     return false
                 }
-                if (!password.isNotEmpty() && password.length >= 8 &&
+                if (password.isEmpty() && password.length >= 8 &&
                     password.matches(".*[A-Z].*".toRegex()) &&
                     password.matches(".*[a-z].*".toRegex()) &&
                     password.matches(".*[0-9].*".toRegex())
