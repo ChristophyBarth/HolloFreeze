@@ -15,7 +15,8 @@ class CategoryAdapter(private val context: Context, private val categories: List
             binding.categoryName.text = category.name
             binding.categoryIcon.setImageResource(category.icon)
 
-            binding.card.setBackgroundColor(context.resources.getColor(category.color, null))
+//            binding.card.setBackgroundColor(context.resources.getColor(category.color, null))
+            binding.card.setCardBackgroundColor(context.resources.getColor(category.color, null))
         }
     }
 

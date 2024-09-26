@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
+    android:padding="10dp"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
@@ -14,10 +15,10 @@
 
         <ImageView
             android:id="@+id/category_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="30dp"
-            tools:src="@drawable/ic_home" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="20dp"
+            tools:src="@drawable/ic_bag" />
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -30,7 +31,7 @@
         android:layout_alignEnd="@id/card"
         android:layout_marginTop="7.5dp"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="15sp"
         tools:text="Home" />
 
 </RelativeLayout>
