@@ -1,5 +1,6 @@
 package capps.learning.hollofreeze
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import capps.learning.hollofreeze.databinding.FragmentHomeBinding
 
+@SuppressLint("NotifyDataSetChanged")
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var categoryAdapter: CategoryAdapter
@@ -15,6 +17,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var itemCollectionAdapter: ItemCollectionAdapter
     private lateinit var listOfItems: MutableList<Item>
+
+    private lateinit var listOfBags: MutableList<Item>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,77 +42,144 @@ class HomeFragment : Fragment() {
         listOfCategories.add(jewelryCategory)
         listOfCategories.add(teeCategory)
 
-        categoryAdapter = CategoryAdapter(requireContext(), listOfCategories)
+        listOfBags = mutableListOf(Item(
+            name = "Classic Leather Tote",
+            description = "A timeless leather tote bag with ample space for daily essentials. Durable and stylish for every occasion.",
+            amount = 79.99,
+            imageRes = R.drawable.ic_bag
+        ),
+            Item(
+                name = "Canvas Weekend Bag",
+                description = "Spacious and lightweight, this canvas weekend bag is perfect for short trips. Features multiple compartments.",
+                amount = 59.49,
+                imageRes = R.drawable.ic_bag
+            ),
+            Item(
+                name = "Minimalist Backpack",
+                description = "A sleek and modern backpack with padded straps and laptop compartment. Ideal for work or travel.",
+                amount = 49.99,
+                imageRes = R.drawable.ic_bag
+            ),
+            Item(
+                name = "Vintage Crossbody Bag",
+                description = "A small, stylish crossbody bag with a retro vibe. Made with high-quality vegan leather and brass details.",
+                amount = 34.99,
+                imageRes = R.drawable.ic_bag
+            ),
+            Item(
+                name = "Sport Duffel Bag",
+                description = "Durable duffel bag with water-resistant fabric. Great for gym sessions or outdoor adventures.",
+                amount = 65.00,
+                imageRes = R.drawable.ic_bag
+            ),
+            Item(
+                name = "Laptop Messenger Bag",
+                description = "Stylish and functional messenger bag designed to safely carry laptops up to 15 inches. Includes multiple pockets.",
+                amount = 89.99,
+                imageRes = R.drawable.ic_bag
+            ),
+            Item(
+                name = "Drawstring Gym Bag",
+                description = "Lightweight drawstring bag made of durable nylon. Ideal for quick trips to the gym or carrying sports gear.",
+                amount = 14.99,
+                imageRes = R.drawable.ic_bag
+            ),)
+
+        categoryAdapter = CategoryAdapter(requireContext(), listOfCategories,
+            object : OnItemClicked {
+                override fun itemClicked(position: Int) {
+                    when (position) {
+                        0 -> {
+                            loadBagItems()
+                        }
+
+                        1 -> {
+                            loadShoeItems()
+                        }
+
+                        2 -> {
+                            loadJewelryItems()
+                        }
+
+                        3 -> {
+                            loadTeesItems()
+                        }
+                    }
+                }
+            })
 
         binding.recyclerView.adapter = categoryAdapter
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        listOfItems = mutableListOf(
+        listOfItems = mutableListOf()
+        listOfItems.addAll(listOfBags)
+
+        itemCollectionAdapter = ItemCollectionAdapter(listOfItems)
+        binding.collectionRecyclerView.adapter = itemCollectionAdapter
+        binding.collectionRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+
+    fun loadBagItems() {
+        listOfItems.clear()
+
+        listOfItems.addAll(listOfBags)
+
+        itemCollectionAdapter.notifyDataSetChanged()
+    }
+
+    fun loadShoeItems() {
+        listOfItems.clear()
+
+        listOfItems.add(
             Item(
                 name = "Nike Air Max",
                 description = "Experience comfort and style with these iconic sneakers.",
                 amount = 129.99,
                 imageRes = R.drawable.ic_bag
-            ),
+            )
+        )
+
+        listOfItems.add(
             Item(
-                name = "Ray-Ban Sunglasses",
-                description = "Protect your eyes in style with these classic shades.",
-                amount = 89.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Apple iPhone 14",
-                description = "Capture stunning photos and enjoy seamless performance.",
-                amount = 799.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Sony PlayStation 5",
-                description = "Immerse yourself in the next generation of gaming.",
-                amount = 499.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Bose QuietComfort Headphones",
-                description = "Enjoy your music without distractions with noise cancellation.",
-                amount = 299.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Samsung Galaxy Watch 5",
-                description = "Stay connected and track your fitness goals.",
-                amount = 249.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "GoPro HERO11 Black",
-                description = "Capture your adventures in stunning 5.3K video.",
-                amount = 399.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Kindle Paperwhite",
-                description = "Read comfortably with a glare-free display.",
-                amount = 139.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Fitbit Versa 4",
-                description = "Track your activity and sleep with this stylish fitness tracker.",
-                amount = 199.99,
-                imageRes = R.drawable.ic_bag
-            ),
-            Item(
-                name = "Lenovo ThinkPad X1 Carbon",
-                description = "Boost your productivity with this powerful and lightweight laptop.",
-                amount = 1299.99,
+                name = "Nike Air Max",
+                description = "Experience comfort and style with these iconic sneakers.",
+                amount = 129.99,
                 imageRes = R.drawable.ic_bag
             )
         )
 
-        itemCollectionAdapter = ItemCollectionAdapter(listOfItems)
-        binding.collectionRecyclerView.adapter = itemCollectionAdapter
-        binding.collectionRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        itemCollectionAdapter.notifyDataSetChanged()
+    }
+
+    fun loadJewelryItems() {
+        listOfItems.clear()
+
+        listOfItems.add(
+            Item(
+                name = "Nike Air Max",
+                description = "Experience comfort and style with these iconic sneakers.",
+                amount = 129.99,
+                imageRes = R.drawable.ic_bag
+            )
+        )
+
+        itemCollectionAdapter.notifyDataSetChanged()
+    }
+
+    fun loadTeesItems() {
+        listOfItems.clear()
+
+        listOfItems.add(
+            Item(
+                name = "Nike Air Max",
+                description = "Experience comfort and style with these iconic sneakers.",
+                amount = 129.99,
+                imageRes = R.drawable.ic_bag
+            )
+        )
+
+        itemCollectionAdapter.notifyDataSetChanged()
     }
 }

@@ -6,17 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import capps.learning.hollofreeze.databinding.CategoryItemBinding
 
-class CategoryAdapter(private val context: Context, private val categories: List<Category>) :
+class CategoryAdapter(private val context: Context, private val categories: List<Category>, private val onItemClicked: OnItemClicked) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(private val binding: CategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: Category) {
+        fun bind(category: Category, position: Int) {
             binding.categoryName.text = category.name
             binding.categoryIcon.setImageResource(category.icon)
 
-//            binding.card.setBackgroundColor(context.resources.getColor(category.color, null))
             binding.card.setCardBackgroundColor(context.resources.getColor(category.color, null))
+
+            binding.root.setOnClickListener {
+                onItemClicked.itemClicked(position)
+            }
         }
     }
 
@@ -34,6 +37,6 @@ class CategoryAdapter(private val context: Context, private val categories: List
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
-        holder.bind(category)
+        holder.bind(category, position)
     }
 }
