@@ -19,6 +19,9 @@ class HomeFragment : Fragment() {
     private lateinit var listOfItems: MutableList<Item>
 
     private lateinit var listOfBags: MutableList<Item>
+    private lateinit var listOfShoes: MutableList<Item>
+    private lateinit var listOfJewelries: MutableList<Item>
+    private lateinit var listOfTees: MutableList<Item>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -84,6 +87,99 @@ class HomeFragment : Fragment() {
                 amount = 14.99,
                 imageRes = R.drawable.ic_bag
             ),)
+        listOfShoes = mutableListOf(
+            Item(
+                name = "Classic Sneakers",
+                description = "Stylish and comfortable sneakers perfect for everyday wear.",
+                amount = 59.99,
+                imageRes = R.drawable.ic_shoe
+            ),
+            Item(
+                name = "Running Shoes",
+                description = "Lightweight shoes designed for optimal performance during runs.",
+                amount = 79.99,
+                imageRes = R.drawable.ic_shoe
+            ),
+            Item(
+                name = "Leather Boots",
+                description = "Durable leather boots ideal for both casual and formal occasions.",
+                amount = 129.99,
+                imageRes = R.drawable.ic_shoe
+            ),
+            Item(
+                name = "Sandals",
+                description = "Comfortable sandals perfect for summer outings and beach days.",
+                amount = 39.99,
+                imageRes = R.drawable.ic_shoe
+            ),
+            Item(
+                name = "High-Top Sneakers",
+                description = "Trendy high-top sneakers that provide support and style.",
+                amount = 89.99,
+                imageRes = R.drawable.ic_shoe
+            ),
+            Item(
+                name = "Dress Shoes",
+                description = "Elegant dress shoes suitable for formal events and occasions.",
+                amount = 99.99,
+                imageRes = R.drawable.ic_shoe
+            )
+
+        )
+        listOfJewelries = mutableListOf(
+            Item(
+                name = "Gold Necklace",
+                description = "Elegant gold necklace that adds a touch of sophistication to any outfit.",
+                amount = 149.99,
+                imageRes = R.drawable.ic_jewelry
+            ),
+            Item(
+                name = "Diamond Earrings",
+                description = "Stunning diamond earrings that sparkle with every movement.",
+                amount = 199.99,
+                imageRes = R.drawable.ic_jewelry
+            ),
+            Item(
+                name = "Silver Bracelet",
+                description = "Chic silver bracelet perfect for everyday wear or special occasions.",
+                amount = 79.99,
+                imageRes = R.drawable.ic_jewelry
+            ),
+            Item(
+                name = "Pearl Ring",
+                description = "Classic pearl ring that exudes timeless elegance and charm.",
+                amount = 129.99,
+                imageRes = R.drawable.ic_jewelry
+            ),
+            Item(
+                name = "Statement Necklace",
+                description = "Bold statement necklace designed to turn heads and make an impression.",
+                amount = 89.99,
+                imageRes = R.drawable.ic_jewelry
+            ),
+        )
+       listOfTees = mutableListOf(
+        Item(
+            name = "Vintage Wash Tee",
+            description = "Stylish vintage wash T-shirt for a relaxed, worn-in feel.",
+            amount = 29.99,
+            imageRes = R.drawable.ic_shirt
+        ),
+        Item(
+            name = "Sporty Performance Tee",
+            description = "Lightweight performance tee designed for workouts and active wear.",
+            amount = 34.99,
+            imageRes = R.drawable.ic_shirt
+        ),
+        Item(
+            name = "Long Sleeve Tee",
+            description = "Comfortable long sleeve tee for cooler weather and layering.",
+            amount = 29.99,
+            imageRes = R.drawable.ic_shirt
+        ),)
+
+
+
 
         categoryAdapter = CategoryAdapter(requireContext(), listOfCategories,
             object : OnItemClicked {
@@ -132,54 +228,21 @@ class HomeFragment : Fragment() {
     fun loadShoeItems() {
         listOfItems.clear()
 
-        listOfItems.add(
-            Item(
-                name = "Nike Air Max",
-                description = "Experience comfort and style with these iconic sneakers.",
-                amount = 129.99,
-                imageRes = R.drawable.ic_bag
-            )
-        )
-
-        listOfItems.add(
-            Item(
-                name = "Nike Air Max",
-                description = "Experience comfort and style with these iconic sneakers.",
-                amount = 129.99,
-                imageRes = R.drawable.ic_bag
-            )
-        )
-
+        listOfItems.addAll(listOfShoes)
         itemCollectionAdapter.notifyDataSetChanged()
     }
 
     fun loadJewelryItems() {
         listOfItems.clear()
 
-        listOfItems.add(
-            Item(
-                name = "Nike Air Max",
-                description = "Experience comfort and style with these iconic sneakers.",
-                amount = 129.99,
-                imageRes = R.drawable.ic_bag
-            )
-        )
-
+        listOfItems.addAll(listOfJewelries)
         itemCollectionAdapter.notifyDataSetChanged()
     }
 
     fun loadTeesItems() {
         listOfItems.clear()
 
-        listOfItems.add(
-            Item(
-                name = "Nike Air Max",
-                description = "Experience comfort and style with these iconic sneakers.",
-                amount = 129.99,
-                imageRes = R.drawable.ic_bag
-            )
-        )
-
+        listOfItems.addAll(listOfTees)
         itemCollectionAdapter.notifyDataSetChanged()
     }
 }
