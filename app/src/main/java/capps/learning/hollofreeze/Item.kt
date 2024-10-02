@@ -6,5 +6,6 @@ data class Item(
     var name: String,
     var description: String,
     var amount: Double,
-    @DrawableRes var imageRes: Int
+    @DrawableRes var imageRes: Int,
+    var quantity: Int? = 0
 )

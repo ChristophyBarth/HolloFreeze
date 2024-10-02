@@ -52,4 +52,7 @@ dependencies {
 
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.circleimageview)
+    implementation(libs.glide)
+    implementation(libs.gson)
+    implementation(libs.kotlinx.coroutines.android)
 }

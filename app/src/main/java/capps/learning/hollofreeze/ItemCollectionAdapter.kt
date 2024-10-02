@@ -1,5 +1,6 @@
 package capps.learning.hollofreeze
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ class ItemCollectionAdapter(private val items: List<Item>) :
 
     class ItemCollectionVH(private val binding: ItemCollectionItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(item: Item) {
             /*binding.nameTv.text = item.name
             binding.descTv.text = item.description
@@ -21,6 +23,9 @@ class ItemCollectionAdapter(private val items: List<Item>) :
                 descTv.text = item.description
                 amountTv.text = "$${item.amount}"
                 itemIv.setImageResource(item.imageRes)
+                fab.setOnClickListener {
+                    GlobalCart.addNewItem(item)
+                }
             }
         }
     }

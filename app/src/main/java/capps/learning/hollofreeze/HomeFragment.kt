@@ -8,6 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import capps.learning.hollofreeze.databinding.FragmentHomeBinding
+import capps.learning.hollofreeze.examples.User
+import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.net.HttpURLConnection
+import java.net.URL
 
 @SuppressLint("NotifyDataSetChanged")
 class HomeFragment : Fragment() {
@@ -30,8 +40,51 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private fun httpGetRequest() {
+        // Specify the URL
+        val url = URL("https://jsonplaceholder.typicode.com/users")
+
+        CoroutineScope(Dispatchers.IO).launch {
+            // Open a connection
+            val connection = url.openConnection() as HttpURLConnection
+
+            try {
+                connection.requestMethod = "GET"  // HTTP GET method
+
+                // Check the response code
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                    val response = connection.inputStream.bufferedReader().use { it.readText() }
+
+                    val gson = Gson()
+                    val type = object : TypeToken<List<User>>() {}.type
+                    val listOfUsers = gson.fromJson<List<User>>(response, type)
+                    println("Response: ${listOfUsers.random()}")
+
+                    withContext(Dispatchers.Main){
+                        binding.name.text = listOfUsers.random().name
+                    }
+                } else {
+                    println("Error: ${connection.responseCode}")
+                }
+            } catch (e: Exception) {
+                println("Failed because: ${e.message}")
+            } finally {
+                connection.disconnect()  // Always close the connection
+            }
+
+        }
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        httpGetRequest()
+
+        Glide.with(this)
+            .asGif()
+            .load("https://www.eminentseo.com/wp-content/uploads/2016/12/Max-Monster-Rainbow-Loop-Eminent-SEO.gif")
+            .placeholder(R.drawable.ic_user_duotone)
+            .into(binding.userImageView)
 
         val bagCategory = Category("Bags", R.drawable.ic_bag, R.color.ourPrimaryColor)
         val shoeCategory = Category("Shoes", R.drawable.ic_shoe, android.R.color.holo_blue_light)
@@ -45,12 +98,13 @@ class HomeFragment : Fragment() {
         listOfCategories.add(jewelryCategory)
         listOfCategories.add(teeCategory)
 
-        listOfBags = mutableListOf(Item(
-            name = "Classic Leather Tote",
-            description = "A timeless leather tote bag with ample space for daily essentials. Durable and stylish for every occasion.",
-            amount = 79.99,
-            imageRes = R.drawable.ic_bag
-        ),
+        listOfBags = mutableListOf(
+            Item(
+                name = "Classic Leather Tote",
+                description = "A timeless leather tote bag with ample space for daily essentials. Durable and stylish for every occasion.",
+                amount = 79.99,
+                imageRes = R.drawable.ic_bag
+            ),
             Item(
                 name = "Canvas Weekend Bag",
                 description = "Spacious and lightweight, this canvas weekend bag is perfect for short trips. Features multiple compartments.",
@@ -86,7 +140,8 @@ class HomeFragment : Fragment() {
                 description = "Lightweight drawstring bag made of durable nylon. Ideal for quick trips to the gym or carrying sports gear.",
                 amount = 14.99,
                 imageRes = R.drawable.ic_bag
-            ),)
+            ),
+        )
         listOfShoes = mutableListOf(
             Item(
                 name = "Classic Sneakers",
@@ -158,28 +213,26 @@ class HomeFragment : Fragment() {
                 imageRes = R.drawable.ic_jewelry
             ),
         )
-       listOfTees = mutableListOf(
-        Item(
-            name = "Vintage Wash Tee",
-            description = "Stylish vintage wash T-shirt for a relaxed, worn-in feel.",
-            amount = 29.99,
-            imageRes = R.drawable.ic_shirt
-        ),
-        Item(
-            name = "Sporty Performance Tee",
-            description = "Lightweight performance tee designed for workouts and active wear.",
-            amount = 34.99,
-            imageRes = R.drawable.ic_shirt
-        ),
-        Item(
-            name = "Long Sleeve Tee",
-            description = "Comfortable long sleeve tee for cooler weather and layering.",
-            amount = 29.99,
-            imageRes = R.drawable.ic_shirt
-        ),)
-
-
-
+        listOfTees = mutableListOf(
+            Item(
+                name = "Vintage Wash Tee",
+                description = "Stylish vintage wash T-shirt for a relaxed, worn-in feel.",
+                amount = 29.99,
+                imageRes = R.drawable.ic_shirt
+            ),
+            Item(
+                name = "Sporty Performance Tee",
+                description = "Lightweight performance tee designed for workouts and active wear.",
+                amount = 34.99,
+                imageRes = R.drawable.ic_shirt
+            ),
+            Item(
+                name = "Long Sleeve Tee",
+                description = "Comfortable long sleeve tee for cooler weather and layering.",
+                amount = 29.99,
+                imageRes = R.drawable.ic_shirt
+            ),
+        )
 
         categoryAdapter = CategoryAdapter(requireContext(), listOfCategories,
             object : OnItemClicked {
